@@ -18,8 +18,9 @@
  *   'aa',''    => 'aa'
  *   '',  'bb'  => 'bb'
  */
-function concatenateStrings(/* value1, value2 */) {
-  throw new Error('Not implemented');
+function concatenateStrings(value1, value2) {
+  // throw new Error('Not implemented');
+  return value1 + value2;
 }
 
 
@@ -34,8 +35,9 @@ function concatenateStrings(/* value1, value2 */) {
  *   'b'     => 1
  *   ''      => 0
  */
-function getStringLength(/* value */) {
-  throw new Error('Not implemented');
+function getStringLength(value) {
+  // throw new Error('Not implemented');
+  return value.length;
 }
 
 /**
@@ -51,8 +53,9 @@ function getStringLength(/* value */) {
  *   'John','Doe'      => 'Hello, John Doe!'
  *   'Chuck','Norris'  => 'Hello, Chuck Norris!'
  */
-function getStringFromTemplate(/* firstName, lastName */) {
-  throw new Error('Not implemented');
+function getStringFromTemplate(firstName, lastName) {
+  //  throw new Error('Not implemented');
+  return `Hello, ${firstName} ${lastName}!`;
 }
 
 /**
@@ -202,8 +205,24 @@ function extractEmails(/* str */) {
  *             '└──────────┘\n'
  *
  */
-function getRectangleString(/* width, height */) {
-  throw new Error('Not implemented');
+function getRectangleString(width, height) {
+  // throw new Error('Not implemented');
+  let lineWidth = '';
+  let lineSpace = '';
+  for (let i = 0; i < width - 2; i += 1) {
+    lineWidth += '─';
+  }
+  for (let i = 0; i < width - 2; i += 1) {
+    lineSpace += ' ';
+  }
+  const firstLine = `┌${lineWidth}┐\n`;
+  const innerLine = `│${lineSpace}│\n`;
+  const lastLine = `└${lineWidth}┘\n`;
+  let result = firstLine;
+  for (let i = 0; i < height - 2; i += 1) {
+    result += innerLine;
+  }
+  return result + lastLine;
 }
 
 
@@ -223,8 +242,21 @@ function getRectangleString(/* width, height */) {
  *    => 'NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm'
  *
  */
-function encodeToRot13(/* str */) {
-  throw new Error('Not implemented');
+function encodeToRot13(str) {
+  // throw new Error('Not implemented');
+  const base = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+  const convert = 'NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm';
+  const input = str.slice();
+  const output = [];
+  for (let i = 0; i < input.length; i += 1) {
+    const currIndex = base.indexOf(input[i]);
+    if (currIndex !== -1) {
+      output.push(convert[currIndex]);
+    } else {
+      output.push(input[i]);
+    }
+  }
+  return output.join('');
 }
 
 /**
@@ -242,6 +274,8 @@ function encodeToRot13(/* str */) {
  */
 function isString(/* value */) {
   throw new Error('Not implemented');
+  /* console.log(typeof value);
+  return (typeof value === 'string'); */
 }
 
 
