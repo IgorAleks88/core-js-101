@@ -300,8 +300,24 @@ function reverseInteger(num) {
  *   5436468789016589 => false
  *   4916123456789012 => false
  */
-function isCreditCardNumber(/* ccn */) {
-  throw new Error('Not implemented');
+function isCreditCardNumber(ccn) {
+  // throw new Error('Not implemented');
+  const number = ccn.toString(10);
+  const modul = number.length % 2;
+  let sum = parseInt(number.charAt(number.length - 1), 10);
+  for (let i = 0; i < number.length - 1; i += 1) {
+    let value = parseInt(number.charAt(i), 10);
+
+    if (i % 2 === modul) {
+      value *= 2;
+    }
+
+    if (value > 9) {
+      value -= 9;
+    }
+    sum += value;
+  }
+  return sum % 10 === 0;
 }
 
 /**
@@ -318,8 +334,15 @@ function isCreditCardNumber(/* ccn */) {
  *   10000 ( 1+0+0+0+0 = 1 ) => 1
  *   165536 (1+6+5+5+3+6 = 26,  2+6 = 8) => 8
  */
-function getDigitalRoot(/* num */) {
-  throw new Error('Not implemented');
+function getDigitalRoot(num) {
+  // throw new Error('Not implemented');
+  const number = num.toString(10);
+  let sum = 0;
+  for (let i = 0; i < number.length; i += 1) {
+    sum += parseInt(number.charAt(i), 10);
+    if (sum > 9) sum -= 9;
+  }
+  return sum;
 }
 
 
@@ -388,6 +411,22 @@ function toNaryString(/* num, n */) {
  */
 function getCommonDirectoryPath(/* pathes */) {
   throw new Error('Not implemented');
+  /* const splitedPathes = pathes.map((string) => string.split('/'));
+  // let result = '';
+  let minlength = splitedPathes[0].length;
+  let minIndex = 0;
+  for (let i = 1; i < splitedPathes.length; i += 1) {
+    if (splitedPathes[i].length < minlength) {
+      minlength = splitedPathes[i].length;
+      minIndex = i;
+    }
+  }
+  for (let i = 0; i < minlength; i += 1) {
+    for (let j = 0; j < splitedPathes.length; j += 1) {
+      splitedPathes[minIndex][i] = splitedPathes[j][i]
+    }
+  }
+  console.log(minIndex); */
 }
 
 
