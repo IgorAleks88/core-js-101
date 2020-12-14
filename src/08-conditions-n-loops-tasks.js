@@ -409,10 +409,10 @@ function toNaryString(/* num, n */) {
  *   ['/web/assets/style.css', '/.bin/mocha',  '/read.me'] => '/'
  *   ['/web/favicon.ico', '/web-scripts/dump', '/webalizer/logs'] => '/'
  */
-function getCommonDirectoryPath(/* pathes */) {
-  throw new Error('Not implemented');
-  /* const splitedPathes = pathes.map((string) => string.split('/'));
-  // let result = '';
+function getCommonDirectoryPath(pathes) {
+  // throw new Error('Not implemented');
+  const splitedPathes = pathes.map((string) => string.split('/'));
+  const result = [];
   let minlength = splitedPathes[0].length;
   let minIndex = 0;
   for (let i = 1; i < splitedPathes.length; i += 1) {
@@ -423,10 +423,13 @@ function getCommonDirectoryPath(/* pathes */) {
   }
   for (let i = 0; i < minlength; i += 1) {
     for (let j = 0; j < splitedPathes.length; j += 1) {
-      splitedPathes[minIndex][i] = splitedPathes[j][i]
+      if (splitedPathes[minIndex][i] !== splitedPathes[j][i]) {
+        return (i === 0) ? result : `${result.join('/')}/`;
+      }
     }
+    result.push(splitedPathes[minIndex][i]);
   }
-  console.log(minIndex); */
+  return result;
 }
 
 
@@ -483,8 +486,24 @@ function getMatrixProduct(/* m1, m2 */) {
  *    [    ,   ,    ]]
  *
  */
-function evaluateTicTacToePosition(/* position */) {
-  throw new Error('Not implemented');
+function evaluateTicTacToePosition(position) {
+  // throw new Error('Not implemented');
+  for (let i = 0; i < 3; i += 1) {
+    const curRow = position[i];
+    if ((curRow[0] === curRow[1]) && (curRow[0] === curRow[2])) {
+      if (curRow[0] !== undefined) { return curRow[0]; }
+    }
+  }
+  for (let i = 0; i < 3; i += 1) {
+    const row = position[0];
+    if ((row[i] === position[1][i]) && (row[i] === position[2][i])) {
+      if (row[i] !== undefined) { return row[i]; }
+    }
+  }
+  const cen = position[1][1];
+  if ((cen === position[0][0]) && (cen === position[2][2])) { return cen; }
+  if ((cen === position[0][2]) && (cen === position[2][0])) { return cen; }
+  return undefined;
 }
 
 
